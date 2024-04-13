@@ -25,11 +25,13 @@ public class UserService {
     }
 
     public User deleteFriend(Long id, Long friendId) throws UserNotFoundException {
-        User user = inMemoryUserStorage.getUserById(id);
-        if (user != null) {
-            user.deleteFriend(friendId);
+        User user1 = inMemoryUserStorage.getUserById(id);
+        User user2 = inMemoryUserStorage.getUserById(friendId);
+        if (user1 != null && user2 != null) {
+            user1.deleteFriend(friendId);
+            user2.deleteFriend(id);
         }
-        return user;
+        return user1;
     }
 
     public List<User> getAllFriends(Long id) throws UserNotFoundException {
